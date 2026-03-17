@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accident Detection Monitor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="menuOverlay" class="menu-overlay"></div>
+    <div id="sideMenu" class="side-menu">
+        <div class="menu-header">
+            <h2>Menu</h2>
+            <button id="closeMenuBtn" class="close-btn">✕</button>
+        </div>
+        <div class="menu-nav">
+            <button class="menu-nav-btn active" id="navLiveAlerts">🔔 Live Alerts</button>
+            <button class="menu-nav-btn" id="navHistory">🕒 Alert History</button>
+        </div>
+        <div class="theme-switcher">
+            <p>Theme</p>
+            <div class="theme-toggle-btns">
+                <button id="themeLight" class="theme-btn">☀️ Light</button>
+                <button id="themeDark" class="theme-btn active">🌙 Dark</button>
+            </div>
+        </div>
+    </div>
+
+    <header class="top-bar">
+        <div class="logo-area">
+            <button id="openMenuBtn" class="hamburger-btn">☰</button>
+            <h1>🚨 Intelligent Traffic Monitor</h1>
+        </div>
+        <div class="top-controls">
+            <input type="file" id="videoUploadInput" accept="video/mp4,video/*" style="display: none;">
+            <button class="upload-btn" id="uploadBtn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                Upload Video
+            </button>
+            <div class="status-indicator">
+                <span class="dot live"></span> System Live
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        
+        <aside class="sidebar">
+            <h2 id="sidebarTitle">Pending Alerts (2)</h2>
+            
+            <div id="liveAlertsContainer" class="alert-list">
+                <div class="alert-card critical active">
+                    <span class="badge red">High Severity</span>
+                    <h3>Camera 04 - Main Intersection</h3>
+                    <p>14:32:05 | Collision</p>
+                </div>
+                <div class="alert-card warning">
+                    <span class="badge yellow">Med Severity</span>
+                    <h3>Camera 12 - Highway Exit</h3>
+                    <p>14:28:43 | Near Miss</p>
+                </div>
+            </div>
+
+            <div id="historyAlertsContainer" class="alert-list" style="display: none;">
+                <div class="alert-card history-card verified">
+                    <div class="history-header">
+                        <span class="badge red">High Severity</span>
+                        <span class="status-text green">✔ Verified</span>
+                    </div>
+                    <h3>Camera 08 - Downtown Bridge</h3>
+                    <p>13:45:22 | Multi-Vehicle Collision</p>
+                </div>
+                <div class="alert-card history-card dismissed">
+                    <div class="history-header">
+                        <span class="badge yellow">Med Severity</span>
+                        <span class="status-text red">✖ Dismissed</span>
+                    </div>
+                    <h3>Camera 15 - Park Avenue</h3>
+                    <p>13:12:08 | Near Miss</p>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-view">
+            <div class="video-container">
+                <div class="video-placeholder">
+                    <p>▶ Click to play accident footage</p>
+                </div>
+            </div>
+
+            <div id="actionPanel" class="action-panel">
+                <button class="btn verify">✅ Verify Accident</button>
+                <button class="btn dismiss">❌ Dismiss False Alarm</button>
+            </div>
+
+            <div class="metadata-panel">
+                <h2>Event Metadata</h2>
+                <div class="metadata-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Time</span>
+                        <strong id="metaTime">14:32:05</strong>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Location</span>
+                        <strong id="metaLocation">Camera 04 - Main Intersection</strong>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Danger Level</span>
+                        <select id="dangerLevelSelect" class="danger-select text-red">
+                            <option value="Low" class="text-yellow">Low</option>
+                            <option value="Medium" class="text-orange">Medium</option>
+                            <option value="High" class="text-red" selected>High</option>
+                        </select>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Detection Confidence</span>
+                        <strong id="metaConfidence">92%</strong>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Triggering Logic</span>
+                        <strong id="metaLogic">Sudden Stop</strong>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
